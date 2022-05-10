@@ -1,0 +1,22 @@
+{
+    "pluginAlias": "ESPSwitch",
+    "pluginType": "accessory",
+    "singular": false,
+    "schema": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "title": "Switch Name",
+                "type": "string",
+                "required": true
+            },
+            "host": {
+                "title": "Host",
+                "decription": "It is advisable to set a static IP for your ESP module.",
+                "type": "string",
+                "required": true,
+                "format": "hostname"
+            }
+        }
+    }
+}
