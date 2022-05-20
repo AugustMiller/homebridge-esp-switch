@@ -1,6 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 
+#include "html.h"
 #include "secrets.h"
 
 const int RELAY = 0;
@@ -19,7 +20,8 @@ bool state = false;
  * Sets pin state to the current value of the `state` variable.
  */
 void applyRelayState() {
-  digitalWrite(RELAY, state ? HIGH : LOW);
+  // The relay is "closed" when in LOW state, and "open" when in HIGH. Be mindful of where the load leads are attached—“on” describes the state of the NO contact!
+  digitalWrite(RELAY, state ? LOW : HIGH);
 }
 
 // Network Configuration
@@ -59,6 +61,24 @@ bool connect() {
 
 // Response Helpers
 // ======================================================
+
+/**
+ * Renders a simple HTML page with the provided title and body.
+ * 
+ * @param String title Page/document title
+ * @param String content Page content
+ */
+String renderHtml(String title, String content) {
+  return "<!DOCTYPE html>" +
+    html("html",
+      html("head", html("title", title)) +
+      html("body",
+        html("header", html("h1", "ESP-01")) +
+        html("main", content) +
+        html("footer", "&copy; 2022, Carpet City")
+      )
+    );
+}
 
 /**
  * Creates a crude JSON string

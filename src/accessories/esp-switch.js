@@ -24,7 +24,7 @@ class ESPSwitch {
 
         this.switchService.getCharacteristic(this.api.hap.Characteristic.On)
             .on(this.api.hap.CharacteristicEventTypes.GET, (callback) => {
-                this.log.info("Current state of the switch was returned: " + (this.switchOn? "ON" : "OFF"));
+                this.log.info(`Current state of the switch was returned: ${this.switchOn ? 'ON' : 'OFF'}`);
                 callback(undefined, this.switchOn);
             })
             .on(this.api.hap.CharacteristicEventTypes.SET, (value, callback) => {
@@ -138,7 +138,7 @@ class ESPSwitch {
      * @param {Object} response Response data
      */
     _handleResponse (response) {
-        this.switchService.updateCharacteristic(this.api.hap.Characteristic.On, response.state);
+        this.switchService.updateCharacteristic(this.api.hap.Characteristic.On, response.on);
     }
 }
 
