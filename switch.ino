@@ -4,7 +4,7 @@
 #include "secrets.h"
 
 const int RELAY = 0;
-const int TIMEOUT = 120 * 1000;    // Milliseconds until connection is abandoned
+const int TIMEOUT = 120 * 1000; // Milliseconds until the network connection is abandoned
 
 // Create server object:
 ESP8266WebServer server(80);
