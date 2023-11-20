@@ -16,6 +16,14 @@
                 "type": "string",
                 "required": true,
                 "format": "hostname"
+            },
+            "updateInterval": {
+                "title": "Update Frequency",
+                "description": "How often should the accessory’s state be updated (in milliseconds)? If the switch is only controlled from HomeKit, this can be relaxed. If the switch is controlled by other sources (like an outside webhook), you may want to tighten the interval so automations trigger more quickly.",
+                "type": "integer",
+                "required": true,
+                "default": 30000,
+                "minimum": 5000
             }
         }
     }

@@ -1,22 +1,35 @@
 const http = require('http');
 
-const QUERY_INTERVAL = 60 * 1000; // Once per minute, maximum
+const { HomebridgeAPI } = require('homebridge/lib/api');
+const { AccessoryConfig } = require('homebridge/lib/bridgeService');
+const { Logger } = require('homebridge/lib/logger');
+
+const MIN_QUERY_INTERVAL = 5 * 1000; // Once every five seconds, maximum
 
 /**
- * Simple Accessory for interfacing with a custom ESP-01S Relay.
+ * Simple Accessory for interfacing with a custom ESP-01S relay.
  */
 class ESPSwitch {
+    /**
+     * @param {Logger} log
+     * @param {AccessoryConfig} config
+     * @param {HomebridgeAPI} api
+     */
     constructor (log, config, api) {
-        // System references:
         this.api = api;
         this.log = log;
 
-        // State properties:
+        /** @property {Boolean} switchOn Current switch state, initialized to "off." */
         this.switchOn = false;
 
-        // Configuration values, consistent throughout the life of the Accessory:
+        /** @property {String} name Device name, as it will be exposed to HomeKit. */
         this.name = config.name;
+
+        /** @property {String} host Device hostname or IP address. */
         this.host = config.host;
+
+        /** @property {Number} updateInterval Frequency (in milliseconds) that the device’s state will be read + synchronized. */
+        this.updateInterval = Math.max(MIN_QUERY_INTERVAL, config.updateInterval);
 
         // Switch Service + Characteristics:
         this.switchService = new this.api.hap.Service.Switch(this.name);
@@ -49,7 +62,7 @@ class ESPSwitch {
         // Start the API request loop, asynchronously...
         setTimeout(() => {
             this.queueRefresh();
-        }, QUERY_INTERVAL);
+        }, this.updateInterval);
     }
 
     /*
