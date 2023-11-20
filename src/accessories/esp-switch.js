@@ -90,7 +90,7 @@ class ESPSwitch {
     queueRefresh () {
         this.getSwitchState()
             .finally(() => {
-                setTimeout(this.queueRefresh.bind(this), QUERY_INTERVAL);
+                setTimeout(this.queueRefresh.bind(this), this.updateInterval);
             });
     }
 
