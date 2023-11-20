@@ -12,7 +12,7 @@
             },
             "host": {
                 "title": "Host",
-                "decription": "It is advisable to set a static IP for your ESP module.",
+                "description": "It is advisable to set a static IP for your ESP module.",
                 "type": "string",
                 "required": true,
                 "format": "hostname"
