@@ -1,6 +1,6 @@
 {
     "private": true,
-    "displayName": "ESP",
+    "displayName": "ESP Switch Plugin",
     "name": "homebridge-esp-plugin",
     "version": "0.0.1",
     "description": "",
