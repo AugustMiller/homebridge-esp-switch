@@ -2,7 +2,7 @@
 
 A simple accessory for connecting to a custom ESP-8266 image. This is not intended or ready for distribution! Just a fun project for our house.
 
-To create a switch, add this block to the `accessories` array of your Homebridge configuration:
+To create a switch, use the Homebridge admin or add this block to the `accessories` array of your Homebridge configuration:
 
 ```json
 {
@@ -53,6 +53,6 @@ You can test out your switch directly, via cURL:
 curl -X POST http://192.168.86.240/state/toggle
 ```
 
-The Homebridge accessory checks the switch state every minute to ensure it is in sync with the device. If you need more frequent updates, you can change the `QUERY_INTERVAL` variable at the top of `esp-switch.js`.
+The Homebridge accessory checks the switch state every 30 seconds (by default) to ensure it is in sync with the device. If you need more frequent updates, change the `updateInterval` key in the accessory configuration.
 
 :deciduous_tree:
